@@ -26,7 +26,7 @@ public class WCateController {
 
 
     @GetMapping(value = "report/wcate")
-    public ResponseEntity<List<Object>> getListofWcate() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<Wcate>> getListofWcate() {
+        return new ResponseEntity<List<Wcate>>(wCateService.getWcate(), HttpStatus.OK);
     }
 }
