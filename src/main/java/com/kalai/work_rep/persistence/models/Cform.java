@@ -6,18 +6,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
-public class Wcate {
+public class Cform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wcateId;
-    private String wcate;
-
-    Wcate(String wcateId) {
-        this.wcateId = Long.parseLong(wcateId);
-    }
+    private Long cformid;
+    @ManyToOne
+    private Wcate wcate;
+    private String cid;
+    private String description;
+    private String eng;
+    private int no_of_commits;
+    private String pull_link;
 }

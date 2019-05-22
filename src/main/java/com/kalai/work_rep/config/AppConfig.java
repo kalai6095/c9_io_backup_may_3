@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 
 
 @Configuration
+@EnableSpringDataWebSupport
 public class AppConfig implements WebMvcConfigurer {
     /*@Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -23,7 +25,6 @@ public class AppConfig implements WebMvcConfigurer {
                 .allowedHeaders("Access-Control-Allow-Headers", "Content-Type,x-requested-with").maxAge(864000)
                 .allowCredentials(false).allowedMethods("POST", "DELETE", "GET");
     }*/
-
 
 
 }

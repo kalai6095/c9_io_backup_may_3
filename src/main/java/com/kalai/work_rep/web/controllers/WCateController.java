@@ -25,6 +25,7 @@ public class WCateController {
     }
 
 
+    @CrossOrigin
     @GetMapping(value = "report/wcate")
     public ResponseEntity<List<Wcate>> getListofWcate() {
         return new ResponseEntity<List<Wcate>>(wCateService.getWcate(), HttpStatus.OK);
