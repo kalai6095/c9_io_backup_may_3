@@ -7,16 +7,15 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
-public class Cform implements Serializable {
+public class Fform implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cformid;
+    private Long fformid;
     @ManyToOne
     private Wcate wcate;
     private String cid;
