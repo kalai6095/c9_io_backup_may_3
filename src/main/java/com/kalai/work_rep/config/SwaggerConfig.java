@@ -27,7 +27,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
-        apiInfoBuilder.title("Generic REST API");
+        apiInfoBuilder.title("Work repo API");
         apiInfoBuilder.description("REST API Generation");
         apiInfoBuilder.version("0.0.1-SNAPSHOT");
         apiInfoBuilder.contact(new Contact("Kalaiselvan", "https://kalai6095.github.io/", "admin@kalai6095.com"));
