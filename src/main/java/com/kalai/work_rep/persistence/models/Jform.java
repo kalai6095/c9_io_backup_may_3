@@ -18,9 +18,9 @@ public class Jform implements Serializable {
     private Long jformid;
     @ManyToOne
     private Wcate wcate;
-    private String cid;
+    private String jid;
     private String description;
     private String eng;
-    private int no_of_commits;
-    private String pull_link;
+    private String c_id;
+    private String j_is_converted;
 }

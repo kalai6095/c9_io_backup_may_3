@@ -18,7 +18,7 @@ public class Fform implements Serializable {
     private Long fformid;
     @ManyToOne
     private Wcate wcate;
-    private String cid;
+    private String f_id;
     private String description;
     private String eng;
     private int no_of_commits;
