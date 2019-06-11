@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Configuration
-@EnableSpringDataWebSupport
+
 public class AppConfig implements WebMvcConfigurer {
     /*@Override
     public void addCorsMappings(CorsRegistry registry) {
