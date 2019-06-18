@@ -1,0 +1,103 @@
+search
+docker search <name> 
+--------------------------------------------------
+run docker image
+
+docker run -d <lib_name>   ex: docker run -d redis
+docker run -d <lib_name>:<version_no> ex: docker run -d redis:3.2
+docker run -d --name redisHostPort -p<host_port>:<container_port> redis:latest    --to open host&container ports using -p
+docker run -d --name redisDynamic -p 6379 redis ------   to run same lib with diff port 
+docker run -d --name redisDirMapped -v /opt/docker/data/redis:/data redis     ---- to avoid a data loss on re-create docker containers using -v /opt/docker/data/redis to store it in local drive/volume.
+ 
+---------------------------------------------------
+running a container in foreground
+
+docker run ubuntu ps   -- launches an ubuntu container and execute the command ps to view all the process running in a container.
+docker run -it ubuntu bash --- get access to a bash shell inside of a container
+   
+ 
+----------------------------------------------------------------
+find running containers:
+docker ps   ----  will return docker running containers list.
+docker inspect <container-id> ex: docker inspect  819d85c61e38  ---> will return json  -->host,ip,lib,id,image,logs path and etc..
+docker logs <container-id>   ex docker logs 819d85c61e38  --- will return logs
+---------------------------------------------------------------------
+
+
+Create docker file
+
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+
+docker build -t <image_name>:<version_number>            ------ to build a docker file  ex: docker  build -t webserver-image:v1 
+docker images  --- to list docker images.
+
+docker run -d -p 80:80 <image_name>   ex docker run -d -p 80:80 webserver-image:v1
+curl docker ---- able to access the result of port 80
+--------------------------------------------------------------------------
+
+
+
+deploy nodejs application as container:
+
+
+FROM node:10-alpine
+RUN mkdir -p /src/app
+WORKDIR /src/app
+COPY package.json /src/app/package.json
+RUN npm i
+COPY . /src/app
+EXPOSE 3000
+CMD ["npm","start"]
+
+docker build -t my-nodejs-app-kalai .
+docker run -d --name my-running-app -p 3000:3000 my-nodejs-app-kalai 
+curl http://docker:3000
+
+pass env variables
+docker run -d --name my-production-running-app -e NODE_ENV=production -p 3000:3000 my-nodejs-app-kalai
+
+
+----------------------------------------------------------------------------
+
+
+docker mysql  
+
+docker pull mysql:latest
+docker run --name db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 mysql:latest
+docker exec -it db /bin/bash
+
+
+  $> mysql -u root -p123
+  
+-----------------------------------------------------
+
+
+custom mysql 
+# This is your Editor pane. Write the Dockerfile here and 
+# use the command line to execute commands
+FROM mysql:latest
+ENV MYSQL_ROOT_PASSWORD 123
+ENV MYSQL_DATABASE users
+ENV MYSQL_USER kalai
+ENV MYSQL_PASSWORD kalai
+ADD setup.sql /docker-entrypoint-initdb.d
+EXPOSE 3306
+
+setup.sql:
+
+CREATE DATABASE books;
+USE books;
+CREATE TABLE authors (id INT, name VARCHAR(20), email VARCHAR(20));
+INSERT INTO authors (id,name,email) VALUES(1,"Vivek","xuz@abc.com");
+INSERT INTO authors (id,name,email) VALUES(2,"Priya","p@gmail.com");
+INSERT INTO authors (id,name,email) VALUES(3,"Tom","tom@yahoo.com");
+
+
+docker build -t docker_custom_db .
+docker run --name docker_custom_db_running -d -p 3306:3306 docker_custom_db
+docker exec -it docker_custom_db_running /bin/bash    ------ to access bash of custom docker image/containers
+
+
+
