@@ -99,5 +99,16 @@ docker build -t docker_custom_db .
 docker run --name docker_custom_db_running -d -p 3306:3306 docker_custom_db
 docker exec -it docker_custom_db_running /bin/bash    ------ to access bash of custom docker image/containers
 
+----------------------------------------------------------------------------------------------------------------
+link multiple containers
+
+docker run --name  docker_custom_mysql_sboot -d -p 8080:8080 docker_custom_mysql_sboot --link docker_custom_db_running -d -p 3306:3306 docker_custom_db_running
+----------------------------------------------------------------------------------------------------------------
+delete images/containers
+docker images
+docker images -a
 
 
+docker image rm <image_name>
+docker container rm <container_id>
+-------------------------------------------------------------------------------------------------------------------
