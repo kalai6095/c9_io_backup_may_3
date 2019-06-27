@@ -22,4 +22,4 @@ ENV artifact ${artifactid}-${version}.jar
 WORKDIR /app
 COPY --from=build /app/target/${artifactid}.jar /app
 EXPOSE 4300
-CMD ["java -jar ${artifactid}.jar"]
+CMD ["java", "-jar", "work_repo.jar"]
