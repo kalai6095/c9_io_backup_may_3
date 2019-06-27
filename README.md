@@ -7,6 +7,6 @@ docker added
 
 `docker pull mysql:5.7`
 
-`docker run --name db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin mysql:5.7`
+`docker run --name docker-mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin mysql:5.7`
 
-`docker run -t --name work_repo_build_2 --link docker-mysql:mysql -p 4300:4300 work_repo_build_2`
+`docker run -t --name work_repo_build --link docker-mysql:mysql -p 4300:4300 work_repo_build`
