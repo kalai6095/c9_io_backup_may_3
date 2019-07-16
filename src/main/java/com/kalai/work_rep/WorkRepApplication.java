@@ -1,6 +1,7 @@
 package com.kalai.work_rep;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kalai.work_rep.utils.ScheduleComponents;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -14,12 +15,14 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableSpringDataWebSupport
 @EnableJpaRepositories
 @EnableTransactionManagement
+@EnableScheduling
 public class WorkRepApplication {
     @Bean
     public ObjectMapper getObjectMapper() {
@@ -43,6 +46,8 @@ public class WorkRepApplication {
         tomcat.addAdditionalTomcatConnectors(redirectConnectorHttp());
         return tomcat;
     }
+
+
 
     private Connector redirectConnectorHttp() {
         Connector redirectConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");

@@ -103,6 +103,9 @@ docker exec -it docker_custom_db_running /bin/bash    ------ to access bash of c
 link multiple containers
 
 docker run --name  docker_custom_mysql_sboot -d -p 8080:8080 docker_custom_mysql_sboot --link docker_custom_db_running -d -p 3306:3306 docker_custom_db_running
+
+docker run -d -t --name work_repo --link docker-mysql:mysql -p 4300:4300 work_repo
+
 ----------------------------------------------------------------------------------------------------------------
 delete images/containers
 docker images
