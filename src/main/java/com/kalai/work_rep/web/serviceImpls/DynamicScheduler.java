@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+@Service
 public class DynamicScheduler implements SchedulingConfigurer {
 
     @Autowired
@@ -43,21 +45,21 @@ public class DynamicScheduler implements SchedulingConfigurer {
         scheduledTaskRegistrar.setScheduler(poolScheduler());
 
         //random next execution time
-        scheduledTaskRegistrar.addTriggerTask(() -> scheduleDynamically(), t -> {
+      /*  scheduledTaskRegistrar.addTriggerTask(() -> scheduleDynamically(), t -> {
             Calendar nextExeTime = new GregorianCalendar();
             Date lastActualExec = t.lastActualExecutionTime();
             nextExeTime.setTime(lastActualExec != null ? lastActualExec : new Date());
             nextExeTime.add(Calendar.SECOND, getNextExecutionTime());
             return nextExeTime.getTime();
-        });
-        //fixed next execution time
-        scheduledTaskRegistrar.addTriggerTask(() -> scheduleDynamically(), t -> {
+        });*/
+       /* //fixed next execution time
+        scheduledTaskRegistrar.addTriggerTask(() -> scheduleFixed(), t -> {
             Calendar nextExeTime = new GregorianCalendar();
             Date lastActualExec = t.lastActualExecutionTime();
             nextExeTime.setTime(lastActualExec != null ? lastActualExec : new Date());
             nextExeTime.add(Calendar.SECOND, 8);
             return nextExeTime.getTime();
-        });
+        });*/
 
         //from Database next execution time
         scheduledTaskRegistrar.addTriggerTask(() -> scheduleDynamically(), t -> {
@@ -67,8 +69,8 @@ public class DynamicScheduler implements SchedulingConfigurer {
             nextExeTime.add(Calendar.SECOND, Integer.parseInt(scheduleService.findOne("Active")));
             return nextExeTime.getTime();
         });
-        CronTrigger cronTrigger = new CronTrigger("0/10 * * * * ?");
-        scheduledTaskRegistrar.addTriggerTask(() -> scheduleCron("0/10 * * * * ?"), cronTrigger);
+       /* CronTrigger cronTrigger = new CronTrigger("0/10 * * * * ?");
+        scheduledTaskRegistrar.addTriggerTask(() -> scheduleCron("0/10 * * * * ?"), cronTrigger);*/
     }
 
     public void scheduleDynamically() {
