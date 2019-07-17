@@ -12,6 +12,7 @@ import org.springframework.scheduling.support.CronTrigger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class DynamicScheduler implements SchedulingConfigurer {
 
@@ -36,7 +37,7 @@ public class DynamicScheduler implements SchedulingConfigurer {
             Calendar nextExeTime = new GregorianCalendar();
             Date lastActualExec = t.lastActualExecutionTime();
             nextExeTime.setTime(lastActualExec != null ? lastActualExec : new Date());
-            nextExeTime.add(Calendar.SECOND, getNextExectionTime());
+            nextExeTime.add(Calendar.SECOND, getNextExecutionTime());
             return nextExeTime.getTime();
         });
         //fixed next execution time
@@ -60,18 +61,28 @@ public class DynamicScheduler implements SchedulingConfigurer {
         scheduledTaskRegistrar.addTriggerTask(() -> scheduleCron("0/10 * * * * ?"), cronTrigger);
     }
 
-    public void scheduleCron(String cron) {
-        System.out.println("scheduleCron: Next execution time of this taken from cron expression -> {}" + cron);
-    }
-
     public void scheduleDynamically() {
         System.out.println("scheduleDynamically: Next execution time of this changes every time between 1 and 5 seconds");
     }
+
+    // I added this to show that one taskRegistrar can have multiple different tasks.
+    // And each of those tasks can have their own next execution time.
     public void scheduleFixed() {
         System.out.println("scheduleFixed: Next execution time of this will always be 7 seconds");
     }
 
     public void scheduledDatabase(String time) {
-        System.out.println("scheduledDatabase: Next execution time of this will be taken from DB -> {}"+ time);
+        System.out.println("scheduledDatabase: Next execution time of this will be taken from DB -> {}" + time);
+    }
+
+    // Only reason this method gets the cron as parameter is for debug purposes.
+    public void scheduleCron(String cron) {
+        System.out.println("scheduleCron: Next execution time of this taken from cron expression -> {}" + cron);
+    }
+
+    // This is only to show that next execution time can be changed on the go with SchedulingConfigurer.
+    // This can not be done via @Scheduled annotation.
+    public int getNextExecutionTime() {
+        return new Random().nextInt(5) + 1;
     }
 }
