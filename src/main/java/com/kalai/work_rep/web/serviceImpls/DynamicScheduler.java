@@ -1,5 +1,6 @@
 package com.kalai.work_rep.web.serviceImpls;
 
+import com.kalai.work_rep.persistence.models.Schedule;
 import com.kalai.work_rep.web.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 
+import javax.annotation.PostConstruct;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -18,6 +20,14 @@ public class DynamicScheduler implements SchedulingConfigurer {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    @PostConstruct
+    public void doInsert() {
+        Schedule sch = new Schedule();
+        sch.setId(1L);
+        sch.setSch("2000");
+        scheduleService.insertSchedule(sch);
+    }
 
     @Bean
     public TaskScheduler poolScheduler() {
