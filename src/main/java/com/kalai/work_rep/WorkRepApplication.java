@@ -1,7 +1,7 @@
 package com.kalai.work_rep;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kalai.work_rep.utils.ScheduleComponents;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;

@@ -16,8 +16,8 @@ public class ScheduleController {
     ScheduleService scheduleService;
 
     @CrossOrigin
-    @PostMapping(value = "insert/wcate")
-    public ResponseEntity<String> postWcateInsert(@RequestBody Schedule schedule) {
+    @PostMapping(value = "insert/schedule")
+    public ResponseEntity<String> postScheduleInsert(@RequestBody Schedule schedule) {
         System.out.println("----------------------");
         System.out.println(schedule.toString());
         scheduleService.insertSchedule(schedule);
@@ -26,7 +26,7 @@ public class ScheduleController {
 
 
     @CrossOrigin
-    @GetMapping(value = "report/wcate")
+    @GetMapping(value = "report/schedule")
     public ResponseEntity<List<Schedule>> getListofSchedule() {
         return new ResponseEntity<List<Schedule>>(scheduleService.getSchedule(), HttpStatus.OK);
     }
