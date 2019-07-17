@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Wcate {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wcateId;
