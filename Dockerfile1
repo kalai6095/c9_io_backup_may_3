@@ -1,0 +1,31 @@
+FROM java:8-jdk-alpine
+COPY ./target/work_repo.jar /usr/app/
+WORKDIR /usr/app
+RUN sh -c 'touch work_repo.jar'
+ENTRYPOINT ["java","-jar","work_repo.jar"]
+
+#FROM java:8-jdk-alpine
+#COPY ./target/work_repo.jar /usr/app/
+#WORKDIR /usr/app
+#RUN sh -c 'touch work_repo.jar'
+#ENTRYPOINT ["java","-jar","work_repo.jar"]
+
+FROM alpine/git as clone
+ARG url
+WORKDIR /app
+RUN git clone ${url}
+
+FROM maven:3.5-jdk-8-alpine as build
+ARG project
+WORKDIR /app
+COPY --from=clone /app/${project} /app
+RUN mvn install
+
+FROM openjdk:8-jre-alpine
+ARG artifactid
+ARG version
+ENV artifact ${artifactid}-${version}.jar
+WORKDIR /app
+COPY --from=build /app/target/${artifact} /app
+EXPOSE 4300
+CMD ["java -jar ${artifact}"]

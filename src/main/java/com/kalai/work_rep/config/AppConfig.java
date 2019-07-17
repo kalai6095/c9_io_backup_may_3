@@ -1,5 +1,11 @@
 package com.kalai.work_rep.config;
 
+<<<<<<< HEAD
+=======
+import com.kalai.work_rep.utils.ScheduleComponents;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+>>>>>>> 4948c56875e7c6d892e309c4bcc6c438ed65738e
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,6 +18,10 @@ public class AppConfig implements WebMvcConfigurer {
                 .allowedHeaders("Access-Control-Allow-Headers", "Content-Type,x-requested-with").maxAge(864000)
                 .allowCredentials(false).allowedMethods("POST", "DELETE", "GET");
     }*/
+
+    //@Autowired
+    //private ScheduleComponents scheduleComponents;
+
 
 
 }
