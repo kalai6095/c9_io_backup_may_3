@@ -24,8 +24,8 @@ public class DynamicDbSchdule {
         return "10";
     }
 
-    //@Scheduled(cron = "* * * ? * *")
-    @Scheduled(fixedRateString = "#{@getConfigRefreshValue}")
+    @Scheduled(cron = "* * * ? * *")
+    //@Scheduled(fixedRateString = "#{@getConfigRefreshValue}")
     public void scheduleTaskUsingCronExpression() {
 
         long now = System.currentTimeMillis() / 1000;

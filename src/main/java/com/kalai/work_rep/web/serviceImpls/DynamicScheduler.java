@@ -27,7 +27,7 @@ public class DynamicScheduler implements SchedulingConfigurer {
     public void doInsert() {
         Schedule sch = new Schedule();
         sch.setId(1L);
-        sch.setSch("2000");
+        sch.setSch("4");
         scheduleService.insertSchedule(sch);
     }
 
@@ -62,7 +62,7 @@ public class DynamicScheduler implements SchedulingConfigurer {
         });*/
 
         //from Database next execution time
-        scheduledTaskRegistrar.addTriggerTask(() -> scheduleDynamically(), t -> {
+        scheduledTaskRegistrar.addTriggerTask(() -> scheduledDatabase(scheduleService.findOne("Active")), t -> {
             Calendar nextExeTime = new GregorianCalendar();
             Date lastActualExec = t.lastActualExecutionTime();
             nextExeTime.setTime(lastActualExec != null ? lastActualExec : new Date());
@@ -85,6 +85,7 @@ public class DynamicScheduler implements SchedulingConfigurer {
 
     public void scheduledDatabase(String time) {
         System.out.println("scheduledDatabase: Next execution time of this will be taken from DB -> {}" + time);
+        System.out.println(new Date());
     }
 
     // Only reason this method gets the cron as parameter is for debug purposes.
