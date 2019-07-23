@@ -19,20 +19,23 @@ public class LDAPDirectoryInformationform implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String ldapconfig_name;
     private String ldapmanager_dis_name;
     private String password;
     private String ldap_user_search_base;
     private String ldap_custom_filter;
     private String synchronize_type;
+    private String ldap_custom_filter_for_group;
     private boolean ldap_sync_once;
     private Integer ldap_re_sync;
     private String ldap_re_sync_every;
     private Date ldap_re_sync_time;
 
-    @ManyToMany(cascade =  CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<AccessControlGroup> accessControlGroups;
-    @ManyToMany(cascade =  CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<LDAPServerInformation> ldapServerInformations;
 
     @ManyToOne
