@@ -115,3 +115,74 @@ docker images -a
 docker image rm <image_name>
 docker container rm <container_id>
 -------------------------------------------------------------------------------------------------------------------
+
+data folder in 
+ 
+docker run -d --name <image_name> -v "$PWD/data":/data  <image_name>
+
+------------------------------------------------------------------------------------------------------------------
+
+add file in .dockerignore
+
+echo <file_name> >> .dockerignore
+docker build -t <name> .
+
+view list of file in docker folder :
+docker run <image/container_name> ls /<folder_name>
+
+
+------------------------------------------------------------------------------------------------------------------
+Optimising Dockerfile with onbuild:
+
+
+vi Dockerfile
+      FROM node:7
+	  RUN mkdir -p /usr/src/app
+	  WORKDIR /usr/src/app
+	  ONBUILD COPY package.json /usr/src/app/
+	  ONBUILD RUN npm i
+	  ONBUILD COPY . /usr/src/app
+	  CMD ["npm", "start"]
+	  FROM node:7-onbuild # building the images based on the onbuild docker file is the same as before.
+	  EXPOSE 3000
+	  
+	  
+docker build -t <image_name> .
+docker run -d --name <container_name> -p 3000:3000 <image_name> 
+
+curl http://<container_name>:3000  
+
+
+------------------------------------------------------------------------------------------------------------------
+Data Container
+
+Create a data Container for storing configruation files using 
+
+docker create -v /config --name <image_name> mysql:latest   ---> will create config.conf file in the $pwd
+ex: docker create -v /config --name dataMysqlContainer mysql:latest
+
+copy the .conf file to docker_image
+docker cp config.conf <image_name>:/config/   
+ex: docker cp config.conf dataMysqlContainer:/config/
+
+
+docker run --volumes-from <image_name> ubuntu ls /config    ---- > -volumes-from <container> option we can use the mount volumes from other containers inside the container bing launched.
+
+Export/Import container
+
+export:
+docker export <container_name> > <file_name>.tar
+ex: docker export dataMysqlContainer > dataMysqlContainer.tar
+
+
+import:
+
+docker  import <filename.tar>
+ex: docker import dataMysqlContainer.tar
+
+
+------------------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------------------
