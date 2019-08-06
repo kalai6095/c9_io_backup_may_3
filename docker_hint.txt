@@ -206,3 +206,14 @@ release:
 --> make build  
 
 ------------------------------------------------------------------------------------------------------------------
+
+docker status
+
+single container:
+
+docker stats nginx   -> shows status of cpu and memory and etc..
+
+
+for multiple containers:
+docker ps -q | xargs docker stats  --> show list of containers status and cpu 
+------------------------------------------------------------------------------------------------------------------
