@@ -217,3 +217,14 @@ docker stats nginx   -> shows status of cpu and memory and etc..
 for multiple containers:
 docker ps -q | xargs docker stats  --> show list of containers status and cpu 
 ------------------------------------------------------------------------------------------------------------------
+
+doccker swarm
+
+create a master/manager 
+docker-machine create --driver virtualbox master_name  --if any error skip using --virtualbox-no-vtx-check
+ example: docker-machine create --driver  virtualbox --virtualbox-no-vtx-check masterManager
+or
+
+docker-machine create --driver hyperv master
+
+------------------------------------------------------------------------------------------------------------------
