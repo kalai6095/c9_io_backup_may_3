@@ -35,6 +35,7 @@ public class LDAPDirectoryInformationform implements Serializable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<AccessControlGroup> accessControlGroups;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<LDAPServerInformation> ldapServerInformations;
 

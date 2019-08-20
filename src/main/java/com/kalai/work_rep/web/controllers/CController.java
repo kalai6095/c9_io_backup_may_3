@@ -21,8 +21,8 @@ public class CController {
     @CrossOrigin
     @PostMapping("/insert/addc")
     public ResponseEntity<String> postWcateInsert(@RequestBody Cform cform) {
-         logger.info("add c in info mode");
-        logger.info("add c in debug mode");
+        logger.info("add c in info mode");
+        logger.debug("add c in debug mode");
         System.out.println("----------------------");
         System.out.println(cform.toString());
         cService.insertC(cform);
