@@ -14,6 +14,34 @@
     <name>work_rep</name>
     <description>Project for WorkRep</description>
     <packaging>jar</packaging>
+    <url>https://github.com/kalai6095/c9_io_backup_may_3</url>
+    <inceptionYear>2018</inceptionYear>
+    <organization>
+        <name>kalai</name>
+        <url>https://github.com/cloudwrokgroup</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>1</id>
+            <name>kalai</name>
+            <organization>cloud work group</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+5.30</timezone>
+        </developer>
+    </developers>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
 
     <properties>
         <java.version>1.8</java.version>
@@ -64,11 +92,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-       <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-test</artifactId>
+             <scope>test</scope>
+         </dependency>-->
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
